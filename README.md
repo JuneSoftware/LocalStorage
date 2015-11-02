@@ -87,16 +87,21 @@ The LocalStorage Editor Window can be opened from:
 ![Image of Local Storage Editor Window](https://raw.githubusercontent.com/JuneSoftware/LocalStorage/master/screenshots/1EditorWindow.png)
 
 Adding an item to the local store.
+
 ![Image of Local Storage Editor Window](https://raw.githubusercontent.com/JuneSoftware/LocalStorage/master/screenshots/2EditorWindowCreate.png)
 
 New/Modified keys are highlighted in yellow.
+
 ![Image of Local Storage Editor Window](https://raw.githubusercontent.com/JuneSoftware/LocalStorage/master/screenshots/3EditorWindowCreated.png)
 
 The New/Modified key-values are in memory and will get written to the store only when `Save All` is clicked. When all the keys are saved they revert back to their default colour.
+
 ![Image of Local Storage Editor Window](https://raw.githubusercontent.com/JuneSoftware/LocalStorage/master/screenshots/4EditorWindowSaved.png)
 
 A key can be deleted by clicking the `x` button. Once a key has been flagged for deletion it will be highlighted in red.
+
 ![Image of Local Storage Editor Window](https://raw.githubusercontent.com/JuneSoftware/LocalStorage/master/screenshots/5EditorWindowDeleting.png)
 
 When the `Save All` button is clicked the keys marked for deletion will be removed.
+
 ![Image of Local Storage Editor Window](https://raw.githubusercontent.com/JuneSoftware/LocalStorage/master/screenshots/6EditorWindowDeleted.png)

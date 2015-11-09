@@ -13,7 +13,7 @@ namespace June {
 	/// </summary>
 	public abstract partial class LocalStore {
 
-	#region Properties
+		#region Properties
 		/// <summary>
 		/// The default int value
 		/// </summary>
@@ -45,7 +45,7 @@ namespace June {
 				return ',';
 			}
 		}
-	#endregion
+		#endregion
 
 
 		private static LocalStore _Instance = null;
@@ -58,21 +58,28 @@ namespace June {
 		public static LocalStore Instance {
 			get {
 				if (null == _Instance) {
-					//This provider uses the PlayerPerfs present in Unity3d as the persistent store
-					_Instance = new LocalStorage.Providers.DefaultLocalStore();
-
-					//This provider uses a JSON file as the persistent store
-					//_Instance = new LocalStorage.Providers.JSONLocalStore();
-
-					//This provider uses a XML file as the persistent store
-					//_Instance = new LocalStorage.Providers.XMLLocalStore();
+					_Instance = InitializeProvider();
 				}
 				return _Instance;
 			}
 		}
 	
+		/// <summary>
+		/// Initializes the provider.
+		/// </summary>
+		/// <returns>The provider.</returns>
+		public static LocalStore InitializeProvider() {
+			//This provider uses the PlayerPerfs present in Unity3d as the persistent store
+			return new LocalStorage.Providers.DefaultLocalStore();
+			
+			////This provider uses a JSON file as the persistent store
+			//return new LocalStorage.Providers.JSONLocalStore();
+			
+			////This provider uses a XML file as the persistent store
+			//return new LocalStorage.Providers.XMLLocalStore();
+		}
 
-	#region Get Methods
+		#region Get Methods
 	
 		/// <summary>
 		/// Gets the int value for a key.
@@ -186,9 +193,9 @@ namespace June {
 			return HasKey (key) ? 1 == GetInt (key) : false;
 		}
 	
-	#endregion
+		#endregion
 	
-	#region Set Methods
+		#region Set Methods
 	
 		/// <summary>
 		/// Sets the int value for a key.
@@ -269,9 +276,9 @@ namespace June {
 			SetInt (key, GetIntOrDefault (key) - 1);
 		}
 
-	#endregion
+		#endregion
 	
-	#region Other Methods
+		#region Other Methods
 	
 		/// <summary>
 		/// Initialize this instance.
@@ -388,6 +395,6 @@ namespace June {
 			Logger.Log ("[LocalStorage] DeserializeData Complete");
 			return true;
 		}
-	#endregion
+		#endregion
 	}
 }

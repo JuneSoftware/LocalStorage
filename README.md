@@ -46,7 +46,7 @@ public static LocalStore InitializeProvider() {
 ### Saving data
 The basic methods to save data are:
 
-```
+```csharp
 June.LocalStore.Instance.SetInt("my_int_key", 123);
 June.LocalStore.Instance.SetFloat("my_float_key", 123.321f);
 June.LocalStore.Instance.SetString("my_string_key", "some string");
@@ -55,7 +55,7 @@ June.LocalStore.Instance.SetString("my_string_key", "some string");
 ### Retrieving Data
 The basic methods to retrieve data are:
 
-```
+```csharp
 int intVal = June.LocalStore.Instance.GetInt("my_int_key");
 float floatVal = June.LocalStore.Instance.GetFloat("my_float_key");
 string strVal = June.LocalStore.Instance.GetString("my_string_key");
@@ -64,7 +64,7 @@ string strVal = June.LocalStore.Instance.GetString("my_string_key");
 ### Helper Methods
 Some helper methods provided:
 
-```
+```csharp
 bool HasKey (string key) // Checks if the key is present in the store
 
 void DeleteKey (string key) // Deletes a key from the store

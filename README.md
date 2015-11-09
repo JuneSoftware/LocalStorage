@@ -21,13 +21,25 @@ Alternatively, you could also clone this repository.
 The [`June/LocalStorage/LocalStore.cs`](https://github.com/JuneSoftware/LocalStorage/blob/master/Assets/June/LocalStorage/LocalStore.cs) file contains a static `Instance` property which is used to initialise the type of provider. In the snippet of code below we are initialising the [`DefaultLocalStore`](https://github.com/JuneSoftware/LocalStorage/blob/master/Assets/June/LocalStorage/Providers/DefaultLocalStore.cs) provider.
 
 ```csharp
+/// <summary>
+/// Gets the local storage instance.
+/// </summary>
 public static LocalStore Instance {
 	get {
 		if (null == _Instance) {
-			_Instance = new LocalStorage.Providers.DefaultLocalStore();
+			_Instance = InitializeProvider();
 		}
 		return _Instance;
 	}
+}
+
+/// <summary>
+/// This method initializes the provider.
+/// </summary>
+/// <returns>The provider.</returns>
+public static LocalStore InitializeProvider() {
+	//This provider uses the PlayerPerfs present in Unity3d as the persistent store
+	return new LocalStorage.Providers.DefaultLocalStore();
 }
 ```
 

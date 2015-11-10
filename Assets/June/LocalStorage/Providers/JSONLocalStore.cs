@@ -32,7 +32,7 @@ namespace June.LocalStorage.Providers {
 			string data = null;
 			try {
 				if(File.Exists(FILE_PATH)) {
-					Debug.Log(FILE_PATH);
+					Logger.Log("[JSONLocalStorage] Opening: " + FILE_PATH);
 					using(StreamReader sr = new StreamReader(FILE_PATH)) {
 						data = sr.ReadToEnd();
 					}

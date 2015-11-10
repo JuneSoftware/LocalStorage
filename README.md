@@ -4,7 +4,7 @@ Simple on device persistent store.
 
 LocalStore provides basic get/set functions to persists data on the device. It also contains an EditorWindow which lets you interact with the data.
 
-The standard interface `LocalStore.cs` can be implemented by multiple providers.
+The standard interface `ILocalStore.cs` can be implemented by multiple providers.
 
 This repository currently contains 3 providers:
 
@@ -24,7 +24,7 @@ The [`June/LocalStorage/LocalStore.cs`](https://github.com/JuneSoftware/LocalSto
 /// <summary>
 /// Gets the local storage instance.
 /// </summary>
-public static LocalStore Instance {
+public static ILocalStore Instance {
 	get {
 		if (null == _Instance) {
 			_Instance = InitializeProvider();
@@ -37,7 +37,7 @@ public static LocalStore Instance {
 /// This method initializes the provider.
 /// </summary>
 /// <returns>The provider.</returns>
-public static LocalStore InitializeProvider() {
+public static ILocalStore InitializeProvider() {
 	//This provider uses the PlayerPerfs present in Unity3d as the persistent store
 	return new LocalStorage.Providers.DefaultLocalStore();
 }
@@ -117,3 +117,52 @@ A key can be deleted by clicking the `x` button. Once a key has been flagged for
 When the `Save All` button is clicked the keys marked for deletion will be removed.
 
 ![Image of Local Storage Editor Window](https://raw.githubusercontent.com/JuneSoftware/LocalStorage/master/screenshots/6EditorWindowDeleted.png)
+
+
+## Writing your custom provider
+
+To create a custom local storage provider you need to inherit the [`June/LocalStorage/ILocalStore.cs`](https://github.com/JuneSoftware/LocalStorage/blob/master/Assets/June/LocalStorage/ILocalStore.cs) class and implement its abstract methods.
+
+You can also use one of the providers already present as a base and override certain methods.
+
+In the following example we use the [`JSONLocalStore.cs`](https://github.com/JuneSoftware/LocalStorage/blob/master/Assets/June/LocalStorage/Providers/JSONLocalStore.cs) as our base and override the `Serialize` and `Deserealize` methods to encrypt and decrypt our data.
+
+```csharp
+public class SecuredJSONLocalStore : JSONLocalStore {
+
+	/// <summary>
+	/// The Encryption Key
+	/// </summary>
+	private const string ENCRYPTION_KEY = "CHANGE_THIS_KEY";
+
+	/// <summary>
+	/// Deserialize the specified data.
+	/// </summary>
+	/// <param name="data">Data.</param>
+	protected override void Deserialize (string data) {
+		base.Deserialize (XOR (ENCRYPTION_KEY, data));
+	}
+
+	/// <summary>
+	/// Serialize the specified data.
+	/// </summary>
+	/// <param name="data">Data.</param>
+	protected override string Serialize (IDictionary<string, object> data) {
+		return XOR (ENCRYPTION_KEY, base.Serialize (data));
+	}
+
+	/// <summary>
+	/// XOR's the specified key and input.
+	/// </summary>
+	/// <param name="key">Key.</param>
+	/// <param name="input">Input.</param>
+	private static string XOR(string key, string input) {
+		StringBuilder output = new StringBuilder();
+		for(int i=0; i < input.Length; i++) {
+			output.Append((char)(input[i] ^ key[(i % key.Length)]));
+		}
+		return output.ToString ();
+	}
+}
+
+```

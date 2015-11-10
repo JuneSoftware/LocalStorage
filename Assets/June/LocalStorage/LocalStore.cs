@@ -42,6 +42,9 @@ namespace June {
 			
 			////This provider uses a XML file as the persistent store
 			//return new LocalStorage.Providers.XMLLocalStore();
+
+			////This provider uses a JSON file as the persistent store but also encrypts the data.
+			//return new LocalStorage.Providers.SecuredJSONLocalStore();
 		}
 	}
 }

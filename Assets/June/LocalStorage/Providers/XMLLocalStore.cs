@@ -14,7 +14,7 @@ namespace June.LocalStorage.Providers {
 	/// <summary>
 	/// XML local storage.
 	/// </summary>
-	public partial class XMLLocalStore : LocalStore {
+	public partial class XMLLocalStore : ILocalStore {
 
 		protected static readonly string FILE_PATH = Application.persistentDataPath + "/LocalStorage.xml";
 

@@ -9,7 +9,7 @@ namespace June.LocalStorage.Providers {
 	/// <summary>
 	/// Default local storage provider uses PlayerPerfs as persistent store.
 	/// </summary>
-	public partial class DefaultLocalStore : LocalStore {
+	public partial class DefaultLocalStore : ILocalStore {
 
 		private const string TYPE_INT = "int";
 		private const string TYPE_FLOAT = "float";

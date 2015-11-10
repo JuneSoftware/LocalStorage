@@ -11,7 +11,7 @@ namespace June.LocalStorage.Providers {
 	/// <summary>
 	/// JSON local storage provider.
 	/// </summary>
-	public partial class JSONLocalStore : LocalStore {
+	public partial class JSONLocalStore : ILocalStore {
 
 		protected static readonly string FILE_PATH = Application.persistentDataPath + "/LocalStorage.json";
 
@@ -32,6 +32,7 @@ namespace June.LocalStorage.Providers {
 			string data = null;
 			try {
 				if(File.Exists(FILE_PATH)) {
+					Debug.Log(FILE_PATH);
 					using(StreamReader sr = new StreamReader(FILE_PATH)) {
 						data = sr.ReadToEnd();
 					}
